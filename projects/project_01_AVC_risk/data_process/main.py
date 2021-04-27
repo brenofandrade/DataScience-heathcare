@@ -5,7 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 import sklearn as sk
-
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import pickle
 
 
 class Preprocess:
@@ -55,34 +57,43 @@ class Modeling:
         self.X = X
         self.y = y
 
+    def split_dataset(self):
+        seed = 7
+        test_size = 0.33
+        X_treino, X_teste, y_treino, y_teste = train_test_split(self.X, self.y, test_size = test_size, random_state = seed)
 
+        return X_treino, X_teste, y_treino, y_teste
 
-
-
-
-
-
-if __name__=='__main__':
+    def train_model(self):
+        X_treino, X_teste, y_treino, y_teste = self.split_dataset()
     
+        # Cria o classificador
+        modelo = RandomForestClassifier()
 
+        # Treina e cria o modelo
+        modelo.fit(X_treino, y_treino)
+
+        if path.exists('model/modelo.pkl'):
+            print("Modelo encontrado!")
+        else:
+            pickle.dump(modelo, open('model/modelo.pkl', 'wb'), protocol = 4)
+
+        y_pred = modelo.predict(X_teste)
+        
+        acuracia = accuracy_score(y_teste, y_pred)
+        print("Acurácia: %.2f%%" % (acuracia * 100.0))
+
+
+
+if __name__ == '__main__':
     
     file_str =  '../data/dataset-avc.csv'
     dataset_obj = Preprocess(file_str)
 
     X,y = dataset_obj.get_features_target()
     
-
-    
-
-    
-    
-
-
-    print(X)
-    print(y)
-
-
-
-
-
+    modelo_v1 = Modeling(X,y)
+ 
+    modelo_v1.train_model()
+   
 

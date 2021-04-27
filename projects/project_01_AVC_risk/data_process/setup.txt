@@ -1,0 +1,4 @@
+conda create -n avc_risk python==3.8 pip
+conda activate avc_risk
+
+conda env create -f requirements.yml
