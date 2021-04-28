@@ -8,7 +8,7 @@ import sklearn as sk
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import pickle
-
+import flask
 
 class Preprocess:
     def __init__(self,file_path):
@@ -74,7 +74,7 @@ class Modeling:
         modelo.fit(X_treino, y_treino)
 
         if path.exists('model/modelo.pkl'):
-            print("Modelo encontrado!")
+            print("Modelo carregado")
         else:
             pickle.dump(modelo, open('model/modelo.pkl', 'wb'), protocol = 4)
 
