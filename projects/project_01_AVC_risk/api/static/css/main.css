@@ -1,11 +1,17 @@
+body {
+    background-color: rgb(76, 144, 167);
+  }
+
+
 form {
     /* Center the form on the page */
     margin: 0 auto;
     width: 500px;
     /* Form outline */
     padding: 1em;
-    border: 1px solid #CCC;
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 1em;
+    background-color: rgb(255, 255, 255);
   }
   
   ul {
@@ -42,7 +48,7 @@ form {
   input:focus,
   textarea:focus {
     /* Additional highlight for focused elements */
-    border-color: #000;
+    border-color: rgb(0, 0, 0);
   }
   
   textarea {

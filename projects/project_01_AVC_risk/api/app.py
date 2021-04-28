@@ -19,11 +19,11 @@ def home():
         
         hipertensao = int(request.form['hipertensao'])
 
-        coracao = request.form['doenca_coracao']
+        coracao = int(request.form['doenca_coracao'])
 
-        residencia = request.form['residencia']
+        residencia = int(request.form['residencia'])
 
-        glicose = request.form['glicose_media']
+        glicose = float(request.form['glicose_media'])
 
         imc = float(request.form['imc'])
 
@@ -89,12 +89,20 @@ def home():
 
         risco_avc = predict_model(novo_paciente)
 
-        return f'O risco de AVC é {risco_avc[0][1]} %'
+        print(novo_paciente.dtypes)
+
+        resultado = f'O risco de AVC é {risco_avc[0][1] * 100} %'
+
+
+        #return redirect(url_for('resultado', risco_avc = risco_avc))
+        return f'<h1 style="text-align:center;padding:100px"> Resultado da predição</h1><p style="color:blue; font-size:30px;text-align:center;"> O risco de AVC é: { risco_avc[0][1] *100} % </p>'
+                
     return render_template('home.html')
     
 
 
 
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-
